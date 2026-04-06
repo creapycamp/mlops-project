@@ -10,7 +10,9 @@ from preprocess import load_and_preprocess
 
 mlflow.set_experiment("IMDB_Sentiment")
 
-DATA_PATH = "data/IMDB_Data.csv"
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_PATH = os.path.join(BASE_DIR, "data", "IMDB_Data.csv")
 X_train, X_test, y_train, y_test = load_and_preprocess(DATA_PATH)
 
 models = {
