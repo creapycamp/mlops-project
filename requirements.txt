@@ -3,3 +3,5 @@ scikit-learn
 pandas
 numpy
 pytest
+gradio
+huggingface_hub

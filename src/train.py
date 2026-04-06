@@ -1,3 +1,4 @@
+import os
 import mlflow
 import mlflow.sklearn
 import pandas as pd
@@ -8,11 +9,15 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, f1_score
 from preprocess import load_and_preprocess
 
-mlflow.set_experiment("IMDB_Sentiment")
-
-import os
+# Fix all paths to project root
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_PATH = os.path.join(BASE_DIR, "data", "IMDB_Data.csv")
+DB_PATH = os.path.join(BASE_DIR, "mlflow.db")
+
+# Point MLflow to correct database
+mlflow.set_tracking_uri(f"sqlite:///{DB_PATH}")
+mlflow.set_experiment("IMDB_Sentiment")
+
 X_train, X_test, y_train, y_test = load_and_preprocess(DATA_PATH)
 
 models = {
